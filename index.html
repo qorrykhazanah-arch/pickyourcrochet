@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pick Your Crochet 🧶</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav id="navbar"><div class="nav-container">
+<a href="#" class="nav-logo" onclick="scrollTo('hero');return false"><span class="logo-icon">🧶</span><span>Pick Your Crochet</span></a>
+<button class="nav-hamburger" id="hamBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+<div class="nav-menu" id="navMenu">
+<a href="#hero" class="nav-link active" data-s="hero" data-i18n="nav_home">Beranda</a>
+<a href="#catalog" class="nav-link" data-s="catalog" data-i18n="nav_catalog">Katalog</a>
+<a href="#about" class="nav-link" data-s="about" data-i18n="nav_about">Tentang</a>
+<a href="#" class="nav-link" id="adminNav" style="display:none" onclick="openAdm();return false"><i class="fas fa-user-shield"></i> <span data-i18n="nav_admin">Admin</span></a>
+<div class="nav-actions">
+<button class="lang-btn" id="langBtn"><i class="fas fa-globe"></i> <span id="langLbl">EN</span></button>
+<button class="cart-btn" onclick="toggleCart()"><i class="fas fa-shopping-bag"></i><span class="cart-badge" id="cBadge" style="display:none">0</span></button>
+</div></div></div></nav>
+
+<section id="hero">
+<div class="hero-floating"><span class="float-yarn" style="--d:0s;--x:10%;--y:20%">🧶</span><span class="float-yarn" style="--d:1.5s;--x:85%;--y:15%">🧸</span><span class="float-yarn" style="--d:.8s;--x:75%;--y:70%">🌸</span><span class="float-yarn" style="--d:2s;--x:20%;--y:75%">💕</span><span class="float-yarn" style="--d:1.2s;--x:50%;--y:10%">🪡</span><span class="float-yarn" style="--d:.5s;--x:92%;--y:45%">🎀</span></div>
+<div class="hero-content">
+<h1 class="hero-title">Pick Your <span class="highlight">Crochet</span></h1>
+<p class="hero-subtitle" data-i18n="hero_sub">Setiap jahitan penuh cinta ♡ Handmade dengan hati, untuk kamu yang unik!</p>
+<div class="hero-buttons"><a href="#catalog" class="btn btn-primary btn-bounce" data-i18n="hero_cta">Jelajahi Koleksi</a><a href="#about" class="btn btn-outline" data-i18n="hero_cta2">Tentang Kami</a></div>
+<div class="hero-stats"><div class="stat-item"><strong>500+</strong><span data-i18n="s_prod">Produk</span></div><div class="stat-item"><strong>1.2K+</strong><span data-i18n="s_happy">Pelanggan Senang</span></div><div class="stat-item"><strong>4.9</strong><span>⭐ Rating</span></div></div>
+</div>
+<div class="hero-wave"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,60C240,120,480,0,720,60C960,120,1200,0,1440,60L1440,120L0,120Z" fill="var(--cream)"/></svg></div>
+</section>
+
+<section id="catalog" class="section"><div class="container">
+<h2 class="section-title" data-i18n="cat_title">Koleksi Kami 🧶</h2>
+<p class="section-subtitle" data-i18n="cat_sub">Pilih rajutan favoritmu, semuanya dibuat dengan penuh cinta!</p>
+<div class="filters-bar">
+<div class="search-box"><i class="fas fa-search"></i><input type="text" id="sInput" data-i18n-placeholder="s_ph" placeholder="Cari produk..."></div>
+<div class="filter-group"><div class="category-filters" id="catF">
+<button class="cat-btn active" data-c="all" data-i18n="c_all">Semua</button>
+<button class="cat-btn" data-c="amigurumi">🧸 Amigurumi</button>
+<button class="cat-btn" data-c="accessories">🎀 Aksesoris</button>
+<button class="cat-btn" data-c="wearable">👗 Pakaian</button>
+<button class="cat-btn" data-c="home-decor">🏠 Dekorasi</button>
+</div></div>
+<div class="filter-group">
+<select id="pFilter" class="filter-select"><option value="all" data-i18n="p_all">Semua Harga</option><option value="u50" data-i18n="p_u50">Di bawah Rp 50.000</option><option value="50100" data-i18n="p_50">Rp 50.000 - Rp 100.000</option><option value="100200" data-i18n="p_100">Rp 100.000 - Rp 200.000</option><option value="o200" data-i18n="p_o200">Di atas Rp 200.000</option></select>
+<select id="sSort" class="filter-select"><option value="def" data-i18n="so_def">Default</option><option value="name" data-i18n="so_name">Nama A-Z</option><option value="pl" data-i18n="so_pl">Harga Terendah</option><option value="ph" data-i18n="so_ph">Harga Tertinggi</option><option value="rat" data-i18n="so_rat">Rating Tertinggi</option></select>
+</div></div>
+<div class="product-grid" id="pGrid"></div>
+<div class="no-results" id="noRes" style="display:none"><span class="no-results-emoji">🥺</span><p data-i18n="no_res">Produk tidak ditemukan...</p></div>
+</div></section>
+
+<section id="about" class="section section-alt"><div class="container">
+<h2 class="section-title" data-i18n="ab_title">Tentang Kami 💕</h2>
+<div class="about-grid">
+<div class="about-card"><div class="about-icon">🧶</div><h3 data-i18n="ab1t">100% Handmade</h3><p data-i18n="ab1d">Setiap produk dibuat tangan satu per satu dengan penuh perhatian.</p></div>
+<div class="about-card"><div class="about-icon">🌿</div><h3 data-i18n="ab2t">Material Berkualitas</h3><p data-i18n="ab2d">Benang premium yang lembut, aman, dan ramah lingkungan.</p></div>
+<div class="about-card"><div class="about-icon">💝</div><h3 data-i18n="ab3t">Made with Love</h3><p data-i18n="ab3d">Dari tangan kami ke tangan kamu, setiap jahitan mengandung cinta.</p></div>
+<div class="about-card"><div class="about-icon">📦</div><h3 data-i18n="ab4t">Packing Cantik</h3><p data-i18n="ab4d">Kemasan cantik, cocok untuk hadiah orang tersayang.</p></div>
+</div></div></section>
+
+<div class="modal-overlay" id="pModal" onclick="if(event.target===this)closePM()"><div class="modal-content modal-product"><button class="modal-close" onclick="closePM()"><i class="fas fa-times"></i></button><div class="modal-product-inner" id="pmBody"></div></div></div>
+<div class="cart-overlay" id="cOver" onclick="toggleCart()"></div>
+<aside class="cart-sidebar" id="cSide"><div class="cart-header"><h3><i class="fas fa-shopping-bag"></i> <span data-i18n="c_title">Keranjang Belanja</span></h3><button class="modal-close" onclick="toggleCart()"><i class="fas fa-times"></i></button></div><div class="cart-body" id="cBody"></div><div class="cart-footer" id="cFoot" style="display:none"><div class="cart-total"><span data-i18n="c_total">Total</span><strong id="cTotal">Rp 0</strong></div><button class="btn btn-primary btn-full" onclick="goCheck()" data-i18n="c_go">Checkout</button></div></aside>
+
+<div class="page-overlay" id="chkPage" style="display:none"><div class="page-container">
+<button class="btn-back" onclick="closeChk()"><i class="fas fa-arrow-left"></i> <span data-i18n="back">Kembali</span></button>
+<h2 class="page-title" id="chkTitle" data-i18n="chk_title">Checkout 🛒</h2>
+<div class="checkout-grid"><div class="checkout-form-section">
+<h3 style="display:flex;justify-content:space-between;align-items:center"><span data-i18n="sh_info">Informasi Pengiriman</span><button class="reset-btn" onclick="clearProfile()"><i class="fas fa-eraser"></i> Reset</button></h3>
+<div class="form-row"><div class="form-group"><label data-i18n="f_name">Nama Lengkap</label><input id="chN"><span class="form-error" id="eN"></span></div><div class="form-group"><label data-i18n="f_phone">No. Telepon</label><input id="chP"><span class="form-error" id="eP"></span></div></div>
+<div class="form-group"><label data-i18n="f_email">Email</label><input id="chE"><span class="form-error" id="eE"></span></div>
+<div class="form-group"><label data-i18n="f_addr">Alamat Lengkap</label><textarea id="chA" rows="3"></textarea><span class="form-error" id="eA"></span></div>
+<div class="form-row"><div class="form-group"><label data-i18n="f_city">Kota</label><input id="chC"><span class="form-error" id="eC"></span></div><div class="form-group"><label data-i18n="f_post">Kode Pos</label><input id="chZ"><span class="form-error" id="eZ"></span></div></div>
+<h3 class="mt-2" data-i18n="sh_method">Metode Pengiriman</h3>
+<div class="radio-group"><label class="radio-card"><input type="radio" name="ship" value="reg" checked onchange="updTot()"><span class="radio-info"><strong data-i18n="sh_reg">Regular (3-5 hari)</strong><small>Rp 15.000</small></span></label><label class="radio-card"><input type="radio" name="ship" value="exp" onchange="updTot()"><span class="radio-info"><strong data-i18n="sh_exp">Express (1-2 hari)</strong><small>Rp 25.000</small></span></label><label class="radio-card"><input type="radio" name="ship" value="sday" onchange="updTot()"><span class="radio-info"><strong data-i18n="sh_sday">Same Day</strong><small>Rp 40.000</small></span></label></div>
+<h3 class="mt-2" data-i18n="pay_method">Metode Pembayaran</h3>
+<div class="radio-group">
+<label class="radio-card"><input type="radio" name="pay" value="qris" checked onchange="onPayMethodChange()"><span class="radio-info"><strong><i class="fas fa-qrcode"></i> QRIS</strong><small>GoPay/OVO/DANA/ShopeePay</small></span></label>
+<label class="radio-card"><input type="radio" name="pay" value="bank" onchange="onPayMethodChange()"><span class="radio-info"><strong><i class="fas fa-university"></i> Transfer Bank</strong><small>Virtual Account, semua bank</small></span></label>
+<div id="bankChoiceWrap" style="display:none;margin:-8px 0 12px 4px"><label style="font-size:.8rem;font-weight:600;color:var(--brown-light);display:block;margin-bottom:6px">Pilih Bank:</label><select id="bankChoice" class="filter-select" style="width:100%">
+<option value="bca">Bank BCA</option>
+<option value="mandiri">Bank Mandiri</option>
+<option value="bni">Bank BNI</option>
+<option value="bri">Bank BRI</option>
+</select></div>
+<label class="radio-card"><input type="radio" name="pay" value="cod" onchange="onPayMethodChange()"><span class="radio-info"><strong><i class="fas fa-money-bill-wave"></i> COD (Bayar di Tempat)</strong><small>Bayar tunai saat barang diterima</small></span></label>
+</div>
+</div><div class="checkout-summary-section">
+<h3 data-i18n="ord_sum">Ringkasan Pesanan</h3>
+<div id="chkItems" class="checkout-items"></div>
+<div class="checkout-totals"><div class="total-row"><span data-i18n="subtot">Subtotal</span><span id="chSub">Rp 0</span></div><div class="total-row"><span data-i18n="ship_cost">Ongkos Kirim</span><span id="chShip">Rp 0</span></div><div class="total-row total-grand"><span data-i18n="grand">Total</span><span id="chGrand">Rp 0</span></div></div>
+<button class="btn btn-primary btn-full btn-bounce" onclick="doPay()" data-i18n="pay_now">Bayar Sekarang</button>
+</div></div></div></div>
+
+<div class="modal-overlay" id="sucModal" onclick="if(event.target===this)closeSuc()"><div class="modal-content modal-success"><div class="success-icon">✨</div><h2 data-i18n="pay_ok">Pembayaran Berhasil!</h2><p id="sucMsg"></p><div id="sucDet" class="payment-details"></div><button class="btn btn-primary" onclick="closeSuc()" data-i18n="back_shop">Kembali Belanja</button></div></div>
+
+<div class="page-overlay" id="admPage" style="display:none"><div class="page-container">
+<button class="btn-back" onclick="closeAdm()"><i class="fas fa-arrow-left"></i> <span data-i18n="back">Kembali</span></button>
+<h2 class="page-title" style="display:flex;justify-content:space-between;align-items:center"><span><i class="fas fa-user-shield"></i> Admin Panel</span><div style="display:flex;gap:8px"><button class="logout-btn" onclick="resetAllData()" title="Hapus semua data & reset"><i class="fas fa-trash-alt"></i> Reset Data</button><button class="logout-btn" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button></div></h2>
+<div class="admin-stats" id="admStats"></div>
+<div class="admin-section"><div class="admin-header"><h3>Manajemen Produk</h3><div style="display:flex;gap:8px"><button class="btn btn-outline btn-sm" onclick="exportProductsCode()"><i class="fas fa-download"></i> Export ke Kode</button><button class="btn btn-primary btn-sm" onclick="openPF()"><i class="fas fa-plus"></i> Tambah</button></div></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>ID</th><th>Produk</th><th>Kategori</th><th>Harga</th><th>Stok</th><th>Aksi</th></tr></thead><tbody id="admTB"></tbody></table></div></div>
+<div class="admin-section"><h3>Riwayat Pesanan</h3><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Order ID</th><th>Nama</th><th>Total</th><th>Bayar</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="ordTB"></tbody></table></div><div class="no-results" id="noOrd" style="display:none"><p>Belum ada pesanan.</p></div></div>
+</div></div>
+
+<div class="modal-overlay" id="ordModal" onclick="if(event.target===this)closeOrd()"><div class="modal-content modal-form" style="max-width:640px"><button class="modal-close" onclick="closeOrd()"><i class="fas fa-times"></i></button><h2>Detail Pesanan</h2><div id="ordBody"></div></div></div>
+
+<div class="modal-overlay" id="pfModal" onclick="if(event.target===this)closePF()"><div class="modal-content modal-form"><button class="modal-close" onclick="closePF()"><i class="fas fa-times"></i></button><h2 id="pfTitle">Tambah Produk</h2>
+<div class="form-group"><label>Foto Produk</label><div class="pf-img-upload"><img id="pfImgPreview" class="pf-img-preview" src="" alt="Preview" style="display:none"><div id="pfImgPlaceholder" class="pf-img-placeholder"><i class="fas fa-image"></i><span>Belum ada foto</span></div></div><input type="file" id="pfImgFile" accept="image/*" onchange="handlePfImgUpload(event)"><div class="pf-img-actions"><label for="pfImgFile" class="btn btn-outline btn-sm" style="cursor:pointer"><i class="fas fa-upload"></i> Pilih Foto</label><button type="button" class="btn btn-outline btn-sm" id="pfImgRemoveBtn" onclick="removePfImg()" style="display:none"><i class="fas fa-trash"></i> Hapus Foto</button></div><span class="form-error" id="pfImgErr"></span></div>
+<div class="form-row"><div class="form-group"><label>Nama (ID)</label><input id="pfNI"></div><div class="form-group"><label>Name (EN)</label><input id="pfNE"></div></div>
+<div class="form-row"><div class="form-group"><label>Kategori</label><select id="pfCat"><option value="amigurumi">Amigurumi</option><option value="accessories">Accessories</option><option value="wearable">Wearable</option><option value="home-decor">Home Decor</option></select></div><div class="form-group"><label>Harga (Rp)</label><input type="number" id="pfPr" min="0"></div></div>
+<div class="form-row"><div class="form-group"><label>Stok</label><input type="number" id="pfSt" min="0"></div><div class="form-group"><label>Rating</label><input type="number" id="pfRa" min="0" max="5" step="0.1" value="4.5"></div></div>
+<div class="form-group"><label>Deskripsi (ID)</label><textarea id="pfDI" rows="2"></textarea></div>
+<div class="form-group"><label>Description (EN)</label><textarea id="pfDE" rows="2"></textarea></div>
+<button class="btn btn-primary btn-full" onclick="savePF()">Simpan Produk</button>
+</div></div>
+
+<div class="modal-overlay" id="logModal" onclick="if(event.target===this)closeLog()"><div class="modal-content modal-login"><button class="modal-close" onclick="closeLog()"><i class="fas fa-times"></i></button><div class="login-icon">🔐</div><h2>Admin Login</h2>
+<div class="form-group"><label>Username</label><input id="logU" placeholder="admin"></div>
+<div class="form-group"><label>Password</label><input type="password" id="logP" placeholder="••••••••"></div>
+<span class="form-error" id="logErr"></span>
+<button class="btn btn-primary btn-full" onclick="doLog()">Login</button>
+<p class="login-hint">Demo: admin / admin123</p>
+</div></div>
+
+<div id="toastC" class="toast-container"></div>
+
+<footer id="footer"><div class="footer-wave"><svg viewBox="0 0 1440 100" preserveAspectRatio="none"><path d="M0,40C360,100,720,0,1080,60C1260,80,1380,40,1440,50L1440,0L0,0Z" fill="var(--cream)"/></svg></div>
+<div class="container footer-grid">
+<div class="footer-col"><h4><span class="logo-icon">🧶</span> Pick Your Crochet</h4><p data-i18n="ft_desc">Toko rajut handmade lucu dari Indonesia.</p><div class="social-links"><a href="https://instagram.com/pick.yourcrochet" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a><a href="https://tiktok.com/@pick.yourcrochet" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a><a href="https://wa.me/6289524927373?text=Halo%2C%20saya%20mau%20tanya%20tentang%20produk%20Pick%20Your%20Crochet" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a></div></div>
+<div class="footer-col"><h4 data-i18n="ft_links">Link Penting</h4><a href="#hero" data-i18n="nav_home">Beranda</a><a href="#catalog" data-i18n="nav_catalog">Katalog</a><a href="#about" data-i18n="nav_about">Tentang</a><a href="#" onclick="openAdm();return false" data-i18n="nav_admin">Admin</a></div>
+<div class="footer-col"><h4 data-i18n="ft_cats">Kategori</h4><a href="#catalog" onclick="filterCat('amigurumi');return false">🧸 Amigurumi</a><a href="#catalog" onclick="filterCat('accessories');return false">🎀 Aksesoris</a><a href="#catalog" onclick="filterCat('wearable');return false">👗 Pakaian</a><a href="#catalog" onclick="filterCat('home-decor');return false">🏠 Dekorasi</a></div>
+<div class="footer-col"><h4 data-i18n="ft_contact">Kontak</h4><p><a href="mailto:pickyourcrochet@gmail.com" style="color:inherit"><i class="fas fa-envelope"></i> pickyourcrochet@gmail.com</a></p><p><a href="https://wa.me/6289524927373" target="_blank" rel="noopener" style="color:inherit"><i class="fas fa-phone"></i> +62 895-2492-7373</a></p><p><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</p></div>
+</div><div class="footer-bottom"><p>&copy; 2025 Pick Your Crochet 🧶 <span data-i18n="ft_rights">Semua hak dilindungi.</span></p></div></footer>
+
+<script src="script.js"></script>
+</body>
+</html>
