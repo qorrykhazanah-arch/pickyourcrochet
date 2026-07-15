@@ -239,4 +239,4 @@ Setiap perubahan state (tambah ke keranjang, ubah filter, edit produk, dll) memi
 - Notifikasi email/WhatsApp otomatis saat status pesanan berubah
 
   ---
-  Dibuat untuk keperluan Tugas Besar KAIT II — Administrasi Bisnis. Semua transaksi pembayaran pada prototype ini bersifat simulasi.
+  Dibuat untuk keperluan Tugas Besar KAIT. Semua transaksi pembayaran pada prototype ini bersifat simulasi.
