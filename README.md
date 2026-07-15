@@ -237,3 +237,6 @@ Setiap perubahan state (tambah ke keranjang, ubah filter, edit produk, dll) memi
 - Sistem autentikasi admin yang aman (hashing password, session/token di server)
 - Fitur ulasan & rating dari pembeli sungguhan
 - Notifikasi email/WhatsApp otomatis saat status pesanan berubah
+
+  ---
+  Dibuat untuk keperluan Tugas Besar KAIT II — Administrasi Bisnis. Semua transaksi pembayaran pada prototype ini bersifat simulasi.
